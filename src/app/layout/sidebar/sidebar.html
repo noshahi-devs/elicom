@@ -1,0 +1,38 @@
+<aside class="sidebar" [class.collapsed]="collapsed">
+
+  <!-- HEADER -->
+  <div class="sidebar-header">
+    <div class="brand" *ngIf="!collapsed">
+      <div class="logo-glow">
+        <i class="material-icons">shopping_cart</i>
+      </div>
+      <span class="brand-name">ELICOM</span>
+    </div>
+
+    <!-- HAMBURGER -->
+    <button class="toggle-btn" (click)="toggleCollapse()">
+      <i class="material-icons">
+        {{ collapsed ? 'menu' : 'chevron_left' }}
+      </i>
+    </button>
+  </div>
+
+  <!-- MENU -->
+  <nav>
+    <ul>
+      <li *ngFor="let item of menuItems"
+          [class.active]="activeItem === item.id"
+          (click)="setActive(item.id)">
+
+        <div class="icon-wrap">
+          <i class="material-icons">{{ item.icon }}</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          {{ item.name }}
+        </span>
+      </li>
+    </ul>
+  </nav>
+
+</aside>

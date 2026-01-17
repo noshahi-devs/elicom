@@ -1,0 +1,189 @@
+:host {
+  perspective: 1400px;
+}
+
+/* ===== SIDEBAR BASE ===== */
+.sidebar {
+  width: 270px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f0c29, #302b63, #24243e);
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s ease;
+  transform-style: preserve-3d;
+  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+/* COLLAPSED */
+.sidebar.collapsed {
+  width: 85px;
+  transform: rotateY(-8deg);
+}
+
+/* SIDEBAR HEADER */
+.sidebar-header {
+  height: 70px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-glow {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff6fd8, #7f00ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px #ff6fd8, 0 0 30px rgba(127, 0, 255, 0.6);
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* HAMBURGER / TOGGLE BUTTON */
+.toggle-btn {
+  border: none;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  color: #000;
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(79, 172, 254, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* MENU */
+nav {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(0, 198, 255, 0.7);
+}
+
+nav li i {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+/* HOVER */
+nav li:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateZ(22px) translateX(6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+nav li:hover i {
+  transform: rotate(-8deg) scale(1.2);
+}
+
+/* ACTIVE */
+nav li.active {
+  background: linear-gradient(135deg, #f7971e, #027baa);
+  color: #000;
+  transform: translateZ(30px) translateX(10px);
+  box-shadow: 0 15px 35px rgba(255, 215, 0, 0.8);
+}
+
+nav li.active .icon-wrap {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  box-shadow: 0 0 18px rgba(255, 81, 47, 0.9);
+}
+
+.menu-text {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* COLLAPSED TEXT */
+.sidebar.collapsed .menu-text,
+.sidebar.collapsed .brand-name {
+  display: none;
+}
+
+.sidebar.collapsed nav li {
+  justify-content: center;
+}
+
+/* ================= SIDEBAR RESPONSIVE ================= */
+
+/* Tablets / Small screens */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 85px;
+    transform: rotateY(0deg);
+  }
+  .sidebar.collapsed {
+    width: 85px;
+  }
+}
+
+/* Mobile / Extra small screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 120px;
+    transform: rotateY(0deg);
+  }
+  .sidebar.collapsed {
+    width: 60px;
+  }
+}
+
+/* Phones / Very small screens */
+@media (max-width: 480px) {
+  .sidebar {
+    display: block;
+  }
+}

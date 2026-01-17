@@ -1,0 +1,19 @@
+<!-- <app-header></app-header>
+
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="content">
+  </div>
+</div> -->
+<!-- app.component.html -->
+<div class="dashboard-layout">
+ <app-sidebar (collapsedChange)="collapsed=$event"></app-sidebar>
+<app-header [sidebarCollapsed]="collapsed"
+            (toggleSidebar)="collapsed=!collapsed">
+</app-header>
+
+  <main class="main-content">
+    <!-- Your main content here -->
+  </main>
+</div>
