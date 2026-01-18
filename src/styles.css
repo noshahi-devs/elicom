@@ -1,3 +1,4 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 :root {
   --sidebar-width: 270px;
   --sidebar-collapsed-width: 85px;

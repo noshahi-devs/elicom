@@ -186,4 +186,8 @@ nav li.active .icon-wrap {
   .sidebar {
     display: block;
   }
+  .icon-wrap{
+    background: none;
+  }
 }
+

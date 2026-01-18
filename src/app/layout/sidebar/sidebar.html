@@ -33,18 +33,6 @@
 
       </li>
 
-      <li routerLink="/add-products"
-          routerLinkActive="active"
-          (click)="setActive('add-products')">
-
-        <div class="icon-wrap">
-          <i class="material-icons">add_box</i>
-        </div>
-
-        <span class="menu-text" *ngIf="!collapsed">
-          Add Products
-        </span>
-      </li>
 
       <li routerLink="/category"
           routerLinkActive="active"
@@ -59,6 +47,18 @@
         </span>
       </li>
 
+      <li routerLink="/products"
+          routerLinkActive="active"
+          (click)="setActive('add-products')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">add_box</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Add Products
+        </span>
+      </li>
       <li routerLink="/order-center"
           routerLinkActive="active"
           (click)="setActive('order-center')">
@@ -115,3 +115,5 @@
   </nav>
 
 </aside>
+
+

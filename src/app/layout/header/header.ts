@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip'; // Add this
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatTooltipModule], // Add this
+  imports: [MatTooltipModule, NgIf], // Add this
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
