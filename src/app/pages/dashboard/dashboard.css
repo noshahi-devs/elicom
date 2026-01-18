@@ -1,0 +1,39 @@
+.dashboard { padding: 20px; color: white; }
+.title { font-size: 28px; margin-bottom: 20px; background: linear-gradient(90deg,#011d1f,#fa03b8); color: transparent; -webkit-background-clip: text; }
+
+/* 6 Cards Grid */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; perspective: 1400px; }
+.stat-card { height: 100px; padding: 15px; border-radius: 18px; transform-style: preserve-3d; transition: 0.5s; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+.stat-card:hover { transform: rotateY(10deg) rotateX(6deg) translateY(-8px); }
+.card-top { display: flex; gap: 10px; align-items: center; }
+.card-top i { font-size: 32px; }
+
+/* CARD COLORS */
+.purple { background: linear-gradient(135deg,#7f00ff,#e100ff); }
+.blue   { background: linear-gradient(135deg,#00c6ff,#0072ff); }
+.green  { background: linear-gradient(135deg,#00ff99,#00b09b); }
+.gold   { background: linear-gradient(135deg,#f7971e,#ffd200); }
+.pink   { background: linear-gradient(135deg,#ff6fb5,#ff1eaa); }
+.cyan   { background: linear-gradient(135deg,#00ffe4,#00bcd4); }
+
+/* MINI CHARTS */
+.stat-card canvas { height: 50px !important; margin-top: -30px; }
+
+/* MIDDLE GRID */
+.middle-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-top: 25px; }
+.panel { border-radius: 16px; padding: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+.graph-panel { background: linear-gradient(135deg,#0b0b18,#1b1b3b); width: 90%;}
+.activity-panel { background: linear-gradient(135deg,#111827,#2a2a4d); }
+.activity { margin: 10px 0; display: flex; align-items: center; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.green { background: #00ff99; } .dot.blue { background: #00c6ff; } .dot.purple { background: #b026ff; } .dot.gold { background: #ffd200; }
+
+/* TABLE PANEL */
+.table-panel { margin-top: 25px; background: linear-gradient(135deg,#0f0c29,#302b63); padding: 15px; }
+table { width: 100%; border-collapse: collapse; color: #fff; }
+th, td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); text-align: left; }
+.status { padding: 5px 10px; border-radius: 15px; font-size: 12px; font-weight: 600; }
+.shipped { background: #0072ff; } .pending { background: #f7971e; } .delivered { background: #00b09b; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) { .middle-grid { grid-template-columns: 1fr; } }

@@ -1,0 +1,57 @@
+<div class="category-page">
+
+  <div class="header">
+    <h2>Category</h2>
+    <button class="btn" (click)="addCategory()">Add Category</button>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label>Category Name</label>
+      <input type="text" [(ngModel)]="category.name" placeholder="Enter category name">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="category.description" placeholder="Enter description"></textarea>
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="category.status">
+        Active
+      </label>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of categories">
+          <td>{{ c.id }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.description }}</td>
+          <td>
+            <span class="status" [class.inactive]="!c.status">
+              {{ c.status ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="delete" (click)="deleteCategory(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -9,7 +9,6 @@
       <span class="brand-name">Prime Ship</span>
     </div>
 
-    <!-- HAMBURGER -->
     <button class="toggle-btn" (click)="toggleCollapse()">
       <i class="material-icons">
         {{ collapsed ? 'menu' : 'chevron_left' }}
@@ -20,18 +19,98 @@
   <!-- MENU -->
   <nav>
     <ul>
-      <li *ngFor="let item of menuItems"
-          [class.active]="activeItem === item.id"
-          (click)="setActive(item.id)">
+
+      <li routerLink="/dashboard"
+          routerLinkActive="active"
+          (click)="setActive('dashboard')">
 
         <div class="icon-wrap">
-          <i class="material-icons">{{ item.icon }}</i>
+          <i class="material-icons">dashboard</i>
+        </div>
+@if (!collapsed) {
+  <span>Dashboard</span>
+}
+
+      </li>
+
+      <li routerLink="/add-products"
+          routerLinkActive="active"
+          (click)="setActive('add-products')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">add_box</i>
         </div>
 
         <span class="menu-text" *ngIf="!collapsed">
-          {{ item.name }}
+          Add Products
         </span>
       </li>
+
+      <li routerLink="/category"
+          routerLinkActive="active"
+          (click)="setActive('category')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">list</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Add Category
+        </span>
+      </li>
+
+      <li routerLink="/order-center"
+          routerLinkActive="active"
+          (click)="setActive('order-center')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">shopping_cart</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Order Center
+        </span>
+      </li>
+
+      <li routerLink="/3pl-partner"
+          routerLinkActive="active"
+          (click)="setActive('3pl-partner')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">local_shipping</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          3PL Partner
+        </span>
+      </li>
+
+      <li routerLink="/warehouses"
+          routerLinkActive="active"
+          (click)="setActive('warehouses')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">warehouse</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Warehouses
+        </span>
+      </li>
+
+      <li routerLink="/withdrawal"
+          routerLinkActive="active"
+          (click)="setActive('withdrawal')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">account_balance_wallet</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Withdrawal
+        </span>
+      </li>
+
     </ul>
   </nav>
 

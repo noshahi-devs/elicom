@@ -1,19 +1,21 @@
-<!-- <app-header></app-header>
+<!-- <app-sidebar></app-sidebar>
 
-<div class="main-layout">
-  <app-sidebar></app-sidebar>
+<div class="main-wrapper">
+  <app-header></app-header>
 
-  <div class="content">
+  <div class="page-content">
+    <router-outlet></router-outlet>
   </div>
 </div> -->
-<!-- app.component.html -->
-<div class="dashboard-layout">
- <app-sidebar (collapsedChange)="collapsed=$event"></app-sidebar>
-<app-header [sidebarCollapsed]="collapsed"
-            (toggleSidebar)="collapsed=!collapsed">
-</app-header>
 
-  <main class="main-content">
-    <!-- Your main content here -->
-  </main>
+
+<app-sidebar (toggleCollapseEvent)="collapsed = $event"></app-sidebar>
+
+<div class="main-wrapper" [class.collapsed]="collapsed">
+  <app-header></app-header>
+  <div class="page-content">
+    <!-- Your dashboard / page content here -->
+         <router-outlet></router-outlet>
+
+  </div>
 </div>

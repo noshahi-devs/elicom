@@ -1,18 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-
-interface MenuItem {
-  id: string;
-  name: string;
-  icon: string;
-}
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './sidebar.html',
-  styleUrls: ['./sidebar.css']
+  styleUrls: ['./sidebar.css'],
+  imports: [CommonModule, RouterModule, RouterLink]
 })
 export class Sidebar {
 
@@ -20,16 +15,6 @@ export class Sidebar {
   activeItem = 'dashboard';
 
   @Output() toggleCollapseEvent = new EventEmitter<boolean>();
-
-  menuItems: MenuItem[] = [
-    { id: 'dashboard', name: 'Dashboard', icon: 'dashboard' },
-    { id: 'add-products', name: 'Add Products', icon: 'add_box' },
-    { id: 'listing-center', name: 'Listing Center', icon: 'list' },
-    { id: 'order-center', name: 'Order Center', icon: 'shopping_cart' },
-    { id: '3pl-partner', name: '3PL Partner', icon: 'local_shipping' },
-    { id: 'warehouses', name: 'Warehouses', icon: 'warehouse' },
-    { id: 'withdrawal', name: 'Withdrawal', icon: 'account_balance_wallet' }
-  ];
 
   toggleCollapse() {
     this.collapsed = !this.collapsed;

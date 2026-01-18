@@ -1,0 +1,99 @@
+<div class="dashboard">
+
+  <h2 class="title">E-Commerce Dashboard</h2>
+
+  <!-- ===== 6 CARDS ===== -->
+  <div class="stats-grid">
+
+    <div class="stat-card purple">
+      <div class="card-top">
+        <i class="material-icons">shopping_cart</i>
+        <div><span>Orders</span><h3>{{ totalOrders() }}</h3></div>
+      </div>
+      <canvas id="ordersChart"></canvas>
+    </div>
+
+    <div class="stat-card blue">
+      <div class="card-top">
+        <i class="material-icons">inventory</i>
+        <div><span>Products</span><h3>{{ totalProducts() }}</h3></div>
+      </div>
+      <canvas id="productsChart"></canvas>
+    </div>
+
+    <div class="stat-card green">
+      <div class="card-top">
+        <i class="material-icons">people</i>
+        <div><span>Customers</span><h3>{{ customers() }}</h3></div>
+      </div>
+      <canvas id="customersChart"></canvas>
+    </div>
+
+    <div class="stat-card gold">
+      <div class="card-top">
+        <i class="material-icons">paid</i>
+        <div><span>Revenue</span><h3>$ {{ revenue() }}</h3></div>
+      </div>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="stat-card pink">
+      <div class="card-top">
+        <i class="material-icons">trending_up</i>
+        <div><span>Growth</span><h3>{{ growth() }}%</h3></div>
+      </div>
+      <canvas id="growthChart"></canvas>
+    </div>
+
+    <div class="stat-card cyan">
+      <div class="card-top">
+        <i class="material-icons">star</i>
+        <div><span>Reviews</span><h3>{{ reviews() }}</h3></div>
+      </div>
+      <canvas id="reviewsChart"></canvas>
+    </div>
+
+  </div>
+
+  <!-- ===== MIDDLE GRID ===== -->
+  <div class="middle-grid">
+
+    <div class="panel graph-panel">
+      <h4>Sales Analytics</h4>
+      <canvas id="mainSalesChart"></canvas>
+    </div>
+
+    <div class="panel activity-panel">
+      <h4>Recent Activity</h4>
+      <div class="activity"><span class="dot green"></span> New order placed</div>
+      <div class="activity"><span class="dot blue"></span> Product added</div>
+      <div class="activity"><span class="dot purple"></span> Payment received</div>
+      <div class="activity"><span class="dot gold"></span> Order shipped</div>
+    </div>
+
+  </div>
+
+  <!-- ===== TABLE ===== -->
+  <div class="panel table-panel">
+    <h4>Recent Orders</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th><th>Customer</th><th>Status</th><th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1023</td><td>Ali Khan</td><td><span class="status shipped">Shipped</span></td><td>$120</td>
+        </tr>
+        <tr>
+          <td>#1024</td><td>Ayesha</td><td><span class="status pending">Pending</span></td><td>$75</td>
+        </tr>
+        <tr>
+          <td>#1025</td><td>Hassan</td><td><span class="status delivered">Delivered</span></td><td>$210</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
