@@ -85,7 +85,7 @@
         <input type="number" [(ngModel)]="productModel.discount" (input)="productModel.finalPrice = calculateFinalPrice()">
 
         <label>Final Price</label>
-        <input type="number" [value]="productModel.finalPrice ?? 0" readonly>
+        <!-- <input type="number" [value]="productModel.finalPrice ?? 0" readonly> -->
 
         <label>Stock</label>
         <input type="number" [(ngModel)]="productModel.stock">

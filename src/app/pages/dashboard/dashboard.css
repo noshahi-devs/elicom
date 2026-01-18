@@ -1,5 +1,5 @@
 .dashboard { padding: 20px; color: white; }
-.title { font-size: 28px; margin-bottom: 20px; margin-top: 30px; background: linear-gradient(90deg,#011d1f,#fa03b8); color: transparent; -webkit-background-clip: text; }
+.title { font-size: 28px; margin-bottom: 20px; margin-top: 30px;padding: 13px; background: linear-gradient(90deg,#011d1f,#fa03b8); color: transparent; -webkit-background-clip: text; }
 
 /* 6 Cards Grid */
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; perspective: 1400px; }

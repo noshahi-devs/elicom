@@ -13,9 +13,10 @@
 
 <div class="main-wrapper" [class.collapsed]="collapsed">
   <app-header></app-header>
-  <div class="page-content">
-    <!-- Your dashboard / page content here -->
-         <router-outlet></router-outlet>
 
+  <div class="page-content">
+    <router-outlet></router-outlet>
+    <!-- Footer included inside page-content so it scrolls naturally -->
+    <app-footer *ngIf="!collapsed"></app-footer>
   </div>
 </div>
