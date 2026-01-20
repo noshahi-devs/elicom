@@ -1,0 +1,47 @@
+<div class="warehouse-container">
+    <div class="page-header">
+        <h2 class="title">Warehouses</h2>
+        <p class="subtitle">Manage inventory across multiple locations</p>
+    </div>
+
+    <div class="map-grid">
+        <div class="warehouse-card" *ngFor="let w of warehouses">
+            <div class="card-header">
+                <div class="city-badge">{{ w.city }}</div>
+                <span class="code">{{ w.code }}</span>
+            </div>
+
+            <div class="card-body">
+                <div class="info-row">
+                    <i class="material-icons">location_on</i>
+                    <p>{{ w.address }}</p>
+                </div>
+                <div class="info-row">
+                    <i class="material-icons">person</i>
+                    <p>Manager: {{ w.manager }}</p>
+                </div>
+
+                <div class="stats-box">
+                    <div class="stat-item">
+                        <h3>{{ w.stockCount | number }}</h3>
+                        <span>Items in Stock</span>
+                    </div>
+                </div>
+
+                <div class="capacity-bar-wrapper">
+                    <div class="capacity-label">
+                        <span>Capacity Used</span>
+                        <span>{{ w.capacity }}%</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill" [style.width.%]="w.capacity"
+                            [style.backgroundColor]="getCapacityColor(w.capacity)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-manage">Manage Inventory</button>
+        </div>
+    </div>
+</div>

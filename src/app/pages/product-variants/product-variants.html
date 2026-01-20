@@ -1,0 +1,90 @@
+<div class="page-container">
+  <h2 class="page-heading">Product Variants</h2>
+
+  <div class="controls-row">
+    <div class="filter-search">
+      <div class="search-box">
+        <input type="text" placeholder="Search by id/product/sku/attributes..." [(ngModel)]="searchTerm">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+
+    <button class="btn-add" (click)="openModal()">+ Add Variant</button>
+  </div>
+
+  <div class="table-3d">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Product ID</th>
+          <th>SKU</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Attributes (JSON)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of filteredVariants() | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+          <td>{{ v.id }}</td>
+          <td>{{ v.productId }}</td>
+          <td>{{ v.sku }}</td>
+          <td>{{ v.price | currency }}</td>
+          <td>{{ v.stock }}</td>
+          <td style="max-width: 280px; word-break: break-word;">{{ v.attributesJson }}</td>
+          <td>
+            <button class="btn-edit" (click)="editVariant(v)">Edit</button>
+            <button class="btn-delete" (click)="deleteVariantConfirm(v.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center">{{ editMode ? 'Edit Variant' : 'Add Variant' }}</h3>
+
+    <div class="modal-body">
+      <label>Product ID</label>
+      <input type="number" [(ngModel)]="variantModel.productId" placeholder="Product id">
+
+      <label>SKU</label>
+      <input type="text" [(ngModel)]="variantModel.sku" placeholder="SKU">
+
+      <label>Price</label>
+      <input type="number" [(ngModel)]="variantModel.price" placeholder="Price">
+
+      <label>Stock</label>
+      <input type="number" [(ngModel)]="variantModel.stock" placeholder="Stock">
+
+      <label>Attributes (JSON)</label>
+      <textarea [(ngModel)]="variantModel.attributesJson" placeholder='{"color":"red","size":"M"}'></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-save" (click)="saveVariant()">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showConfirmModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center; margin-bottom:20px;">Confirm Deletion</h3>
+    <p style="text-align:center; margin-bottom:30px;">Are you sure you want to delete this variant?</p>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-delete" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>

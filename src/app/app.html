@@ -12,7 +12,7 @@
 <app-sidebar (toggleCollapseEvent)="collapsed = $event"></app-sidebar>
 
 <div class="main-wrapper" [class.collapsed]="collapsed">
-  <app-header></app-header>
+  <app-header [sidebarCollapsed]="collapsed"></app-header>
 
   <div class="page-content">
     <router-outlet></router-outlet>

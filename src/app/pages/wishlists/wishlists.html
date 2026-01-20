@@ -1,0 +1,75 @@
+<div class="page-container">
+  <h2 class="page-heading">Wishlists</h2>
+
+  <div class="controls-row">
+    <div class="filter-search">
+      <div class="search-box">
+        <input type="text" placeholder="Search by id/user/product..." [(ngModel)]="searchTerm">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+
+    <button class="btn-add" (click)="openModal()">+ Add Wishlist</button>
+  </div>
+
+  <div class="table-3d">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>Product ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let w of filteredWishlists() | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+          <td>{{ w.id }}</td>
+          <td>{{ w.userId }}</td>
+          <td>{{ w.productId }}</td>
+          <td>
+            <button class="btn-edit" (click)="editWishlist(w)">Edit</button>
+            <button class="btn-delete" (click)="deleteWishlistConfirm(w.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center">{{ editMode ? 'Edit Wishlist' : 'Add Wishlist' }}</h3>
+
+    <div class="modal-body">
+      <label>User ID</label>
+      <input type="number" [(ngModel)]="wishlistModel.userId" placeholder="User id">
+
+      <label>Product ID</label>
+      <input type="number" [(ngModel)]="wishlistModel.productId" placeholder="Product id">
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-save" (click)="saveWishlist()">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showConfirmModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center; margin-bottom:20px;">Confirm Deletion</h3>
+    <p style="text-align:center; margin-bottom:30px;">Are you sure you want to delete this wishlist?</p>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-delete" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>

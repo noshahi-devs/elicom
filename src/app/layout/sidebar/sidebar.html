@@ -59,6 +59,110 @@
           Add Products
         </span>
       </li>
+
+      <li routerLink="/orders"
+          routerLinkActive="active"
+          (click)="setActive('orders')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">receipt_long</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Orders
+        </span>
+      </li>
+
+      <li routerLink="/order-items"
+          routerLinkActive="active"
+          (click)="setActive('order-items')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">list_alt</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Order Items
+        </span>
+      </li>
+
+      <li routerLink="/users"
+          routerLinkActive="active"
+          (click)="setActive('users')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">group</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Users
+        </span>
+      </li>
+
+      <li routerLink="/user-addresses"
+          routerLinkActive="active"
+          (click)="setActive('user-addresses')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">location_on</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          User Addresses
+        </span>
+      </li>
+
+      <li routerLink="/settings"
+          routerLinkActive="active"
+          (click)="setActive('settings')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">settings</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Settings
+        </span>
+      </li>
+
+      <li routerLink="/product-variants"
+          routerLinkActive="active"
+          (click)="setActive('product-variants')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">tune</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Product Variants
+        </span>
+      </li>
+
+      <li routerLink="/product-images"
+          routerLinkActive="active"
+          (click)="setActive('product-images')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">image</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Product Images
+        </span>
+      </li>
+
+      <li routerLink="/wishlists"
+          routerLinkActive="active"
+          (click)="setActive('wishlists')">
+
+        <div class="icon-wrap">
+          <i class="material-icons">favorite</i>
+        </div>
+
+        <span class="menu-text" *ngIf="!collapsed">
+          Wishlists
+        </span>
+      </li>
       <li routerLink="/order-center"
           routerLinkActive="active"
           (click)="setActive('order-center')">

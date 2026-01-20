@@ -17,10 +17,7 @@ export class Header {
     this.toggleSidebar.emit();
   }
 
-collapsed: any;
-toggleCollapse() {
-throw new Error('Method not implemented.');
-}
+  collapsed: any;
   @Output() toggleSidebarEvent = new EventEmitter<void>();
   isDarkMode = false;
 

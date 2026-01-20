@@ -1,0 +1,133 @@
+<div class="page-container">
+  <h2 class="page-heading">User Addresses</h2>
+
+  <div class="controls-row">
+    <div class="filter-search">
+      <select [(ngModel)]="filterType" class="filter-select">
+        <option value="">All Types</option>
+        <option value="shipping">Shipping</option>
+        <option value="billing">Billing</option>
+      </select>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search by user/city/address..." [(ngModel)]="searchTerm">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+
+    <button class="btn-add" (click)="openModal()">+ Add Address</button>
+  </div>
+
+  <div class="table-3d">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>Type</th>
+          <th>City</th>
+          <th>Postal</th>
+          <th>Default</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of filteredAddresses() | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+          <td>{{ a.id }}</td>
+          <td>{{ a.userId }}</td>
+          <td><span class="badge">{{ a.addressType }}</span></td>
+          <td>{{ a.city }}</td>
+          <td>{{ a.postalCode }}</td>
+          <td>
+            <span class="badge" [ngClass]="a.isDefault ? 'active' : 'inactive'">
+              {{ a.isDefault ? 'yes' : 'no' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn-edit" (click)="editAddress(a)">Edit</button>
+            <button class="btn-delete" (click)="deleteAddressConfirm(a.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center">{{ editMode ? 'Edit Address' : 'Add Address' }}</h3>
+
+    <div class="modal-body">
+      <label>User ID</label>
+      <input type="number" [(ngModel)]="addressModel.userId" placeholder="User id">
+
+      <label>Address Type</label>
+      <select [(ngModel)]="addressModel.addressType">
+        <option value="shipping">Shipping</option>
+        <option value="billing">Billing</option>
+      </select>
+
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="addressModel.firstName" placeholder="First name">
+
+      <label>Last Name</label>
+      <input type="text" [(ngModel)]="addressModel.lastName" placeholder="Last name">
+
+      <label>Address Line 1</label>
+      <input type="text" [(ngModel)]="addressModel.addressLine1" placeholder="Address line 1">
+
+      <label>Address Line 2</label>
+      <input type="text" [(ngModel)]="addressModel.addressLine2" placeholder="Address line 2">
+
+      <label>City</label>
+      <input type="text" [(ngModel)]="addressModel.city" placeholder="City">
+
+      <label>State</label>
+      <input type="text" [(ngModel)]="addressModel.state" placeholder="State">
+
+      <label>Postal Code</label>
+      <input type="text" [(ngModel)]="addressModel.postalCode" placeholder="Postal code">
+
+      <label>Country</label>
+      <input type="text" [(ngModel)]="addressModel.country" placeholder="Country">
+
+      <label>Phone</label>
+      <input type="text" [(ngModel)]="addressModel.phone" placeholder="Phone">
+
+      <label>Default</label>
+      <select [(ngModel)]="addressModel.isDefault">
+        <option [ngValue]="true">Yes</option>
+        <option [ngValue]="false">No</option>
+      </select>
+
+      <label>Delivery Instructions</label>
+      <textarea [(ngModel)]="addressModel.deliveryInstructions" placeholder="Delivery instructions"></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-save" (click)="saveAddress()">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="showConfirmModal">
+  <div class="modal-3d">
+    <h3 style="text-align:center; margin-bottom:20px;">Confirm Deletion</h3>
+    <p style="text-align:center; margin-bottom:30px;">Are you sure you want to delete this address?</p>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-delete" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>

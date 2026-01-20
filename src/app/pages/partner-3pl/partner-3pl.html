@@ -1,0 +1,43 @@
+<div class="partner-container">
+    <div class="page-header">
+        <h2 class="title">3PL Partners</h2>
+        <p class="subtitle">Integrate courier services for seamless shipping</p>
+    </div>
+
+    <div class="partners-grid">
+        <div class="partner-card" *ngFor="let partner of partners">
+            <div class="logo-circle">
+                {{ partner.name.charAt(0) }}
+            </div>
+
+            <h3 class="partner-name">{{ partner.name }}</h3>
+
+            <span class="status-badge" [ngClass]="partner.status.toLowerCase()">
+                {{ partner.integrated ? partner.status : 'Not Connected' }}
+            </span>
+
+            <div class="stats-row" *ngIf="partner.integrated">
+                <div class="stat">
+                    <strong>{{ partner.successRate }}%</strong>
+                    <span>Success Rate</span>
+                </div>
+                <div class="stat">
+                    <strong>{{ partner.avgDeliveryTime }}</strong>
+                    <span>Avg Time</span>
+                </div>
+            </div>
+
+            <div class="stats-row" *ngIf="!partner.integrated" style="justify-content: center; opacity: 0.5;">
+                <span>Connect to view stats</span>
+            </div>
+
+            <button *ngIf="!partner.integrated" class="action-btn btn-connect" (click)="connectPartner(partner)">
+                Connect Partner
+            </button>
+
+            <button *ngIf="partner.integrated" class="action-btn btn-toggle" (click)="toggleStatus(partner)">
+                {{ partner.status === 'Active' ? 'Deactivate' : 'Activate' }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<div class="order-container">
+    <div class="page-header">
+        <h2 class="title">{{ pageTitle }} <span class="count-badge">({{ currentCount }})</span></h2>
+        <p class="subtitle">Manage and track your customer orders efficiently</p>
+    </div>
+
+    <div class="summary-cards" *ngIf="activeTab === 'All'">
+        <div class="card neon-blue" (click)="setActiveTab('New')">
+            <div class="card-icon"><i class="material-icons">new_releases</i></div>
+            <div class="card-info">
+                <h3>{{ countNew }}</h3>
+                <span>New Orders</span>
+            </div>
+        </div>
+
+        <div class="card neon-purple" (click)="setActiveTab('Confirmed')">
+            <div class="card-icon"><i class="material-icons">thumb_up</i></div>
+            <div class="card-info">
+                <h3>{{ countConfirmed }}</h3>
+                <span>Confirmed</span>
+            </div>
+        </div>
+
+        <div class="card neon-gold" (click)="setActiveTab('Shipped')">
+            <div class="card-icon"><i class="material-icons">local_shipping</i></div>
+            <div class="card-info">
+                <h3>{{ countShipped }}</h3>
+                <span>Shipped</span>
+            </div>
+        </div>
+
+        <div class="card neon-green" (click)="setActiveTab('Delivered')">
+            <div class="card-icon"><i class="material-icons">check_circle</i></div>
+            <div class="card-info">
+                <h3>{{ countDelivered }}</h3>
+                <span>Delivered</span>
+            </div>
+        </div>
+
+        <div class="card neon-red" (click)="setActiveTab('Cancelled')">
+            <div class="card-icon"><i class="material-icons">cancel</i></div>
+            <div class="card-info">
+                <h3>{{ countCancelled }}</h3>
+                <span>Cancelled</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs-container" *ngIf="activeTab === 'All'">
+        <div class="tabs">
+            <button class="active" (click)="setActiveTab('All')">All Orders</button>
+            <button (click)="setActiveTab('New')">New</button>
+            <button (click)="setActiveTab('Confirmed')">Confirmed</button>
+            <button (click)="setActiveTab('Shipped')">Shipped</button>
+            <button (click)="setActiveTab('Delivered')">Delivered</button>
+            <button (click)="setActiveTab('Cancelled')">Cancelled</button>
+        </div>
+    </div>
+
+    <div class="orders-table-wrapper">
+        <table class="table-3d">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Order ID</th>
+                    <th>Buyer</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of filteredOrders | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                    <td>
+                        <div class="product-cell">
+                            <span class="primary-text">{{ order.productName }}</span>
+                        </div>
+                    </td>
+                    <td class="primary-text">{{ order.orderId }}</td>
+                    <td class="secondary-text">{{ order.buyerName }}</td>
+                    <td class="primary-text">{{ order.quantity }}</td>
+                    <td class="primary-text" style="color:#00ff99;">Rs. {{ order.amount }}</td>
+                    <td class="secondary-text">{{ order.date | date:'mediumDate' }}</td>
+                    <td><span class="status-badge" [ngClass]="order.status.toLowerCase()">{{ order.status }}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon" (click)="viewDetails(order)" title="View Details">
+                                <i class="material-icons">visibility</i>
+                            </button>
+
+                            <button *ngIf="order.status === 'New'" class="btn-action confirm"
+                                (click)="updateStatus(order, 'Confirmed')" title="Confirm Order">
+                                <i class="material-icons">check</i>
+                            </button>
+
+                            <button *ngIf="order.status === 'Confirmed'" class="btn-action ship"
+                                (click)="updateStatus(order, 'Shipped')" title="Mark as Shipped">
+                                <i class="material-icons">local_shipping</i>
+                            </button>
+
+                            <button *ngIf="order.status === 'Shipped'" class="btn-action deliver"
+                                (click)="updateStatus(order, 'Delivered')" title="Mark as Delivered">
+                                <i class="material-icons">assignment_turned_in</i>
+                            </button>
+
+                            <button *ngIf="order.status === 'New' || order.status === 'Confirmed'"
+                                class="btn-action cancel" (click)="updateStatus(order, 'Cancelled')"
+                                title="Cancel Order">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-wrapper">
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+
+</div>
+
+
+<div class="modal-backdrop" *ngIf="showModal && selectedOrder" (click)="closeModal()">
+    <div class="modal-3d" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h3>Order Details - {{ selectedOrder.orderId }}</h3>
+            <button class="close-btn" (click)="closeModal()"><i class="material-icons">close</i></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="status-tracker">
+                <div class="step"
+                    [class.completed]="['New', 'Confirmed', 'Shipped', 'Delivered'].includes(selectedOrder.status)">
+                    <div class="circle">1</div>
+                    <span>New</span>
+                </div>
+                <div class="line"
+                    [class.completed]="['Confirmed', 'Shipped', 'Delivered'].includes(selectedOrder.status)"></div>
+                <div class="step"
+                    [class.completed]="['Confirmed', 'Shipped', 'Delivered'].includes(selectedOrder.status)">
+                    <div class="circle">2</div>
+                    <span>Confirmed</span>
+                </div>
+                <div class="line" [class.completed]="['Shipped', 'Delivered'].includes(selectedOrder.status)"></div>
+                <div class="step" [class.completed]="['Shipped', 'Delivered'].includes(selectedOrder.status)">
+                    <div class="circle">3</div>
+                    <span>Shipped</span>
+                </div>
+                <div class="line" [class.completed]="selectedOrder.status === 'Delivered'"></div>
+                <div class="step" [class.completed]="selectedOrder.status === 'Delivered'">
+                    <div class="circle">4</div>
+                    <span>Delivered</span>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-section">
+                    <h4>Product Info</h4>
+                    <p><strong>Item:</strong> {{ selectedOrder.productName }}</p>
+                    <p><strong>Quantity:</strong> {{ selectedOrder.quantity }}</p>
+                    <p><strong>Total:</strong> ${{ selectedOrder.amount }}</p>
+                </div>
+                <div class="detail-section">
+                    <h4>Customer Info</h4>
+                    <p><strong>Name:</strong> {{ selectedOrder.buyerName }}</p>
+                    <p><strong>Address:</strong> {{ selectedOrder.shippingAddress }}</p>
+                </div>
+                <div class="detail-section">
+                    <h4>Payment</h4>
+                    <p><strong>Status:</strong> <span class="payment-badge"
+                            [class.released]="selectedOrder.paymentStatus==='Released'">{{ selectedOrder.paymentStatus
+                            }}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button *ngIf="selectedOrder.status === 'New'" class="btn-primary"
+                (click)="updateStatus(selectedOrder, 'Confirmed')">Confirm Order</button>
+            <button *ngIf="selectedOrder.status === 'Confirmed'" class="btn-primary"
+                (click)="updateStatus(selectedOrder, 'Shipped')">Mark as Shipped</button>
+            <button *ngIf="['New', 'Confirmed'].includes(selectedOrder.status)" class="btn-danger"
+                (click)="updateStatus(selectedOrder, 'Cancelled')">Cancel Order</button>
+            <button class="btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+
+    </div>
+</div>

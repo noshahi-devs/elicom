@@ -11,14 +11,13 @@ import { NgIf } from "@angular/common";
   imports: [
     Header,
     Sidebar,
-    Header,
     RouterOutlet,
     Footer,
-      NgIf
-],
+    NgIf
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-collapsed: any;
+  collapsed = false;
 }
